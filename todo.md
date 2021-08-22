@@ -1,5 +1,5 @@
 #PetShop
 -[x] A classe PetShop com nome.
--[] Funcionários
+-[x] Funcionários
 -[] Login
 -[] Produtos
