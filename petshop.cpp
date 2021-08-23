@@ -8,6 +8,16 @@ using namespace std;
 PetShop::PetShop(string nome){
   this -> nome = nome;
 }
+int PetShop::idDoEmail(string email){
+  auto funcionarioAtual = this->funcionarios.begin();
+  while(funcionarioAtual != this->funcionarios.end()){
+    if(funcionarioAtual->email == email){
+      return funcionarioAtual->id;
+    }
+    funcionarioAtual++;
+  }
+  return -1;
+}
 
 string PetShop::cadastrarFuncionario(string nome, string email, string senha){
   Funcionario novoFuncionario(nome, email, senha);
@@ -49,14 +59,26 @@ string PetShop::logarFuncionario(string email, string senha, string caixa){
   }
 
   
-  return "Nao Implementado";
+  return "Email/senha Invalidos";
 }
 
 string PetShop::cadastrarProduto(int funcionarioId, string nomeProduto, float valor){
-  return "Nao Implementado";
+  if(this->funcionariosLogados.count(funcionarioId) > 0){
+    Produto novoProduto(nomeProduto, valor);
+    this->produtos.push_back(novoProduto);
+    return "Produto inserido com sucesso";
+  }else{
+    return "Funcionario nao esta logado.";
+  }  
 }
 
 string PetShop::listarProdutos(){
-  return "Nao Implementado";
+  string retorno = "";
+  auto produtoAtual = this->produtos.begin();
+  while(produtoAtual != this->produtos.end()){
+    retorno += produtoAtual->nome +"/n";
+    produtoAtual++;
+  }
+  return retorno;
 }
 
